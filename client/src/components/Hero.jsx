@@ -14,11 +14,12 @@ function Hero() {
     ];
 
     return (
-        <section>
+        <section className="min-h-screen bg-slate-100 flex flex-col item-center justify-center text-center ">
 
-            <h1>🚀 Understand Any Codebase with AI</h1>
+            <h1 className="text-5x1 font-bold text-slate-900">
+                🚀 Understand Any Codebase with AI</h1>
 
-            <p>
+            <p className="mt-4 text-x1 text-gray-600">
                 Upload your GitHub Repository and let AI explain your project.
             </p>
 
