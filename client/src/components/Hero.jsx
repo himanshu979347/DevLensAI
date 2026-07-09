@@ -16,20 +16,19 @@ function Hero() {
     return (
         <section className="min-h-screen bg-slate-100 flex flex-col item-center justify-center text-center ">
 
-            <h1 className="text-5x1 font-bold text-slate-900">
+            <h1 className="text-5x1 font-bold text-slate-900 leading-tight">
                 🚀 Understand Any Codebase with AI</h1>
 
-            <p className="mt-4 text-x1 text-gray-600">
-                Upload your GitHub Repository and let AI explain your project.
+            <p className="mt-6 text-lg text-gray-600 max-w-2x1">
+                Upload your GitHub Repository and let AI explain your project,
+                detect bugs and generate documentation within seconds.
+                
             </p>
 
-            {
-                isLoggedIn ?(
-                <Button text="Upload Project" />
-                ):(
-                <Button text="Analyze with AI" />
-                )
-            }
+            <div className="flex gap-4 mt-8">
+                <Button text="Upload Repository" />
+                <Button text="Try Demo" />
+            </div>
 
             <div>
                 {features.map((feature, index) => (
