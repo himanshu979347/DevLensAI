@@ -5,14 +5,22 @@ function Hero() {
     const isLoggedIn=true;
 
     const features = [
-        "AI Code Review",
-        "Bug Detection",
-        "Code Summary",
-        "Documentation",
-        "Complexity Analysis",
-        "AI Security Scan"
-    ];
-
+  {
+    icon: "🤖",
+    title: "AI Code Review",
+    description: "Understand any codebase quickly."
+  },
+  {
+    icon: "🐞",
+    title: "Bug Detection",
+    description: "Find possible bugs instantly."
+  },
+  {
+    icon: "📄",
+    title: "Documentation",
+    description: "Generate documentation using AI."
+  }
+];
     return (
         <section className="min-h-screen bg-slate-100 flex flex-col item-center justify-center text-center ">
 
@@ -30,11 +38,13 @@ function Hero() {
                 <Button text="Try Demo" />
             </div>
 
-            <div>
+            <div className="grid md:grid-cols-3 gap-6 mt-16">
                 {features.map((feature, index) => (
                     <FeatureCard
                         key={index}
-                        title={feature}
+                        icon={feature.icon}
+                        title={feature.title}
+                        description={feature.description}
                     />
                 ))}
             </div>
