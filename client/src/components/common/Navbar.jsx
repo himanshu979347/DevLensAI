@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Button from "./Button";
+import Button from "../common/Button";
 
 function Navbar(props){
     const[isMenuOpen, setIsMenuOpen]= useState(false);
