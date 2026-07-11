@@ -7,18 +7,21 @@ function Navbar(props){
                  DevLensAI
             </h1>
 
-            <ul className="flex gap-8 text-gray-7000 font-medium">
+            <ul className="hidden md:flex gap-8 text-gray-7000 font-medium">
                 <li>Features</li>
                 <li>Pricing</li>
                 <li>Docs</li>
                 <li>About</li>
             </ul>
 
-            <div className="flex gap-4">
+            <div className="hidden md:flex gap-4">
                 <Button
                 text="Login"
                 variant="secondary"/>
                 <Button text="Get Started"/>
+                <button className="md:hidden text-3xl">
+                    ☰
+                </button>
             </div>
         </nav>
     );
