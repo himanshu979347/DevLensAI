@@ -1,5 +1,6 @@
 import Button from "./Button";
 import { useState } from "react";
+import AnalysisDashboard from "./AnalysisDashbord";
 
 function RepositoryInput() {
     const[repoUrl, setRepoUrl]=useState("");
@@ -18,6 +19,34 @@ function RepositoryInput() {
             setResult("Repository analyzed successfully. AI Report is Ready.");
         },3000);
     };
+
+    const reportData = [
+    {
+        icon: "📄",
+        title: "Project Summary",
+        value: "MERN Stack Project"
+    },
+    {
+        icon: "🐞",
+        title: "Bugs Found",
+        value: "12"
+    },
+    {
+        icon: "🔒",
+        title: "Security Score",
+        value: "92%"
+    },
+    {
+        icon: "⚡",
+        title: "Complexity",
+        value: "Medium"
+    },
+    {
+        icon: "💡",
+        title: "AI Suggestion",
+        value: "Use Lazy Loading"
+    }
+];
 
     return (
         <section className="py-20 bg-white">
@@ -62,29 +91,9 @@ loading && (
 )
 
 }
-{
-
-result && (
-
-<div className="mt-8 p-6 rounded-lg bg-green-100 border border-green-300">
-
-<h3 className="font-bold text-green-700">
-
-✅ Analysis Complete
-
-</h3>
-
-<p className="mt-2">
-
-{result}
-
-</p>
-
-</div>
-
-)
-
-}
+{result &&(
+    <AnalysisDashboard report={reportData}/>
+)}
 
 
         </section>

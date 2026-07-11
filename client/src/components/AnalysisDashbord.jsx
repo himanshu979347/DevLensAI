@@ -1,34 +1,6 @@
 import AnalysisCard from "./AnalysisCard";
 
-function AnalysisDashboard() {
-
-    const report = [
-        {
-            icon: "📄",
-            title: "Project Summary",
-            value: "MERN Stack Project"
-        },
-        {
-            icon: "🐞",
-            title: "Bugs Found",
-            value: "12"
-        },
-        {
-            icon: "🔒",
-            title: "Security Score",
-            value: "92%"
-        },
-        {
-            icon: "⚡",
-            title: "Complexity",
-            value: "Medium"
-        },
-        {
-            icon: "💡",
-            title: "AI Suggestion",
-            value: "Use Lazy Loading"
-        }
-    ];
+function AnalysisDashboard({report}) {
 
     return (
         <section className="py-20">
