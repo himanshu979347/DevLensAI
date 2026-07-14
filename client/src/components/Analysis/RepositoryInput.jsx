@@ -6,18 +6,36 @@ function RepositoryInput() {
     const[repoUrl, setRepoUrl]=useState("");
     const[loading, setLoading]=useState(false);
     const[result, setResult]=useState("");
+    const[loadingMessage, setLoadingMessage]= useState("");
 
     const handleAnalyze= () => {
         if(repoUrl.trim()===""){
             alert("Please enter GitHub Repository URL");
             return;
         }
+        const githubRegex =/^https:\/\/github\.com\/[A-Za-z0-9_.-]+\/[A-Za-z0-9_.-]+\/?$/;
+        if(!githubRegex.test(repoUrl)){
+            alert("Please enter a valid GitHub Repository URL");
+            return;
+        }
+
         setLoading(true);
+        setLoadingMessage("🔗 Connecting to GitHub...");
         setResult("");
+
+        setTimeout(()=>{
+            setLoadingMessage("📂 Reading Repository...");
+        },1000);
+        setTimeout(()=>{
+            setLoadingMessage("🧠 AI is Understanding Code...");
+        },2000);
+        setTimeout(()=>{
+            setLoadingMessage("📝 Generating Report...");
+        },3000);
         setTimeout(()=>{
             setLoading(false);
             setResult("Repository analyzed successfully. AI Report is Ready.");
-        },3000);
+        },4000);
     };
 
     const reportData = [
@@ -82,10 +100,8 @@ function RepositoryInput() {
 
 loading && (
 
-<p className="text-center text-blue-600 mt-6">
-
-🤖 AI is analyzing repository...
-
+<p className="text-center text-blue-600 mt-6 text-lg font-semibold">
+{loadingMessage}
 </p>
 
 )
