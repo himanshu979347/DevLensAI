@@ -1,16 +1,18 @@
-const analyzeRepository = (req, res) => {
+const {
+    fetchRepository
+} = require("../services/githubService");
+
+const analyzeRepository = async (req, res) => {
 
     const { repoUrl } = req.body;
 
-    console.log("Repository URL:", repoUrl);
+    const repositoryData = await fetchRepository(repoUrl);
 
     res.json({
 
         success: true,
 
-        message: "Repository received successfully.",
-
-        repository: repoUrl
+        data: repositoryData
 
     });
 
