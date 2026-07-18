@@ -4,17 +4,33 @@ const {
 
 const analyzeRepository = async (req, res) => {
 
-    const { repoUrl } = req.body;
+    try {
 
-    const repositoryData = await fetchRepository(repoUrl);
+        const { repoUrl } = req.body;
 
-    res.json({
+        const repositoryData = await fetchRepository(repoUrl);
 
-        success: true,
+        res.json({
 
-        data: repositoryData
+            success: true,
 
-    });
+            data: repositoryData
+
+        });
+
+    } catch (error) {
+
+        console.error(error);
+
+        res.status(500).json({
+
+            success: false,
+
+            message: error.message
+
+        });
+
+    }
 
 };
 

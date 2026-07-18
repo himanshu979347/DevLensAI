@@ -2,36 +2,48 @@ const axios = require("axios");
 
 const fetchRepository = async (repoUrl) => {
 
-    const parts = repoUrl.replace("https://github.com/", "").split("/");
+    try {
 
-    const owner = parts[0];
+        const parts = repoUrl.replace("https://github.com/", "").split("/");
 
-    const repo = parts[1];
+        const owner = parts[0];
+        const repo = parts[1];
 
-    const githubApi = `https://api.github.com/repos/${owner}/${repo}`;
+        const githubApi = `https://api.github.com/repos/${owner}/${repo}`;
+        console.log("Owner:", owner);
+console.log("Repo:", repo);
+console.log("GitHub API:", githubApi);
 
-    const response = await axios.get(githubApi);
+        const response = await axios.get(githubApi);
 
-    return {
+        const languageResponse = await axios.get(`${githubApi}/languages`);
 
-        repository: response.data.full_name,
+        return {
 
-        language: response.data.language,
+            repository: response.data.full_name,
 
-        stars: response.data.stargazers_count,
+            language: response.data.language,
 
-        forks: response.data.forks_count,
+            stars: response.data.stargazers_count,
 
-        openIssues: response.data.open_issues_count,
+            forks: response.data.forks_count,
 
-        defaultBranch: response.data.default_branch
+            openIssues: response.data.open_issues_count,
 
-    };
+            defaultBranch: response.data.default_branch,
+
+            languages: languageResponse.data
+
+        };
+
+    } catch (error) {
+    console.error("GitHub API URL:", githubApi);
+    console.error("Original Error:", error.response?.data || error.message);
+    throw error;
+}
 
 };
 
 module.exports = {
-
     fetchRepository
-
 };
