@@ -8,7 +8,7 @@ function RepositoryInput() {
     const[result, setResult]=useState("");
     const[loadingMessage, setLoadingMessage]= useState("");
 
-    const handleAnalyze= () => {
+    const handleAnalyze= async () => {
         if(repoUrl.trim()===""){
             alert("Please enter GitHub Repository URL");
             return;
@@ -20,23 +20,53 @@ function RepositoryInput() {
         }
 
         setLoading(true);
-        setLoadingMessage("🔗 Connecting to GitHub...");
+        setLoadingMessage("🔗 Connecting to Backend...");
         setResult("");
 
-        setTimeout(()=>{
-            setLoadingMessage("📂 Reading Repository...");
-        },1000);
-        setTimeout(()=>{
-            setLoadingMessage("🧠 AI is Understanding Code...");
-        },2000);
-        setTimeout(()=>{
-            setLoadingMessage("📝 Generating Report...");
-        },3000);
-        setTimeout(()=>{
-            setLoading(false);
-            setResult("Repository analyzed successfully. AI Report is Ready.");
-        },4000);
+        try {
+
+    const response = await fetch("http://localhost:5000/analyze",{
+
+        method:"POST",
+
+        headers:{
+
+            "Content-Type":"application/json"
+
+        },
+
+        body:JSON.stringify({
+
+            repoUrl
+
+        })
+
+    });
+
+    const data = await response.json();
+
+setLoading(false);
+
+if(data.success){
+    setResult(data.data);
+}else{
+    alert(data.message);
+}
+
+}catch(error){
+
+console.error("Backend Error :", error);
+
+setLoading(false);
+
+setResult("");
+
+alert("Backend Connection Failed");
+
+}
+
     };
+    
 
     const reportData = [
     {
@@ -88,13 +118,10 @@ function RepositoryInput() {
                 />
 
                 <Button
-                     text={ loading ? "Analyzeing..." : "Analyze"}
+                     text={ loading ? "Analyzing..." : "Analyze"}
                      onClick={handleAnalyze}
                 />
             </div>
-            <p className="mt-4 text-center text-blue-600">
-                    {repoUrl}
-                </p>
 
                 {
 
