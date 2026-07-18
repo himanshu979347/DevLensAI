@@ -66,35 +66,6 @@ alert("Backend Connection Failed");
 }
 
     };
-    
-
-    const reportData = [
-    {
-        icon: "📄",
-        title: "Project Summary",
-        value: "MERN Stack Project"
-    },
-    {
-        icon: "🐞",
-        title: "Bugs Found",
-        value: "12"
-    },
-    {
-        icon: "🔒",
-        title: "Security Score",
-        value: "92%"
-    },
-    {
-        icon: "⚡",
-        title: "Complexity",
-        value: "Medium"
-    },
-    {
-        icon: "💡",
-        title: "AI Suggestion",
-        value: "Use Lazy Loading"
-    }
-];
 
     return (
         <section className="py-20 bg-white">
@@ -135,7 +106,7 @@ loading && (
 
 }
 {result &&(
-    <AnalysisDashboard report={reportData}/>
+    <AnalysisDashboard report={result}/>
 )}
 
 
