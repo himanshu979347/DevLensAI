@@ -42,6 +42,8 @@ function AnalysisDashboard({ report }) {
 
     ];
 
+    const languages = report.languages || {};
+
     return (
 
         <section className="py-20">
@@ -63,6 +65,23 @@ function AnalysisDashboard({ report }) {
 
                 ))}
 
+            </div>
+            <div className="mt-16">
+                <h3 className="text-3xl font-bold mb-6">
+                    💻 Languages Used
+                </h3>
+                {
+                Object.entries(languages).map(([name, bytes]) => (
+                <div key={name} className="flex justify-between border-b py-3">
+                    <span>
+                        {name}
+                    </span>
+                    <span>
+                        {bytes.toLocaleString()} bytes
+                    </span>
+                </div>
+              ))
+              }
             </div>
 
         </section>
