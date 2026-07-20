@@ -5,7 +5,7 @@ import AnalysisDashboard from "./AnalysisDashbord";
 function RepositoryInput() {
     const[repoUrl, setRepoUrl]=useState("");
     const[loading, setLoading]=useState(false);
-    const[result, setResult]=useState("");
+    const[result, setResult]=useState(null);
     const[loadingMessage, setLoadingMessage]= useState("");
 
     const handleAnalyze= async () => {
