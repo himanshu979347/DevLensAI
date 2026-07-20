@@ -77,13 +77,26 @@ function AnalysisDashboard({ report }) {
 
                             <div
                                 key={name}
-                                className="flex justify-between border-b py-3"
-                            >
+                                className="mb-6">
+                                    
+                                    {/* Top Row */}
+                                    <div className="flex justify-between mb-2">
+                                        <span className="font-semibold text-slate-700">
+                                            {name}
+                                        </span>
+                                        <span className="font-bold text-blue-600">
+                                            {percentage}%
+                                        </span>
+                                    </div>
+                                    
+                                    {/* Progress Bar Background */}
+                                    <div className="w-full bg-gray-200 rounded-full h-3">
+                                        {/* Filled Progress */}
+                                        <div className="bg-blue-600 h-3 rounded-full transition-all duration-700"
+                                        style={{width: `${percentage}%`}}>
 
-                                <span>{name}</span>
-
-                                <span>{percentage}%</span>
-
+                                    </div>
+                                </div>
                             </div>
 
                         );
