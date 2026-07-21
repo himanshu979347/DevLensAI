@@ -1,6 +1,7 @@
 import AnalysisCard from "./AnalysisCard";
 import AIScoreCard from "./AIScoreCard";
 import RepositoryStats from "./RepositoryStats";
+import AISummary from "./AISummary";
 
 function AnalysisDashboard({ report }) {
 
@@ -107,6 +108,7 @@ function AnalysisDashboard({ report }) {
 
             </div>
             <RepositoryStats report={report} />
+            <AISummary aiAnalysis={report.aiAnalysis} />
 
         </section>
     );
