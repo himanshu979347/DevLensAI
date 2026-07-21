@@ -1,6 +1,5 @@
-const {
-    fetchRepository
-} = require("../services/githubService");
+const { fetchRepository} = require("../services/githubService");
+const {analyzeWithAI}= require("../services/aiService");
 
 const analyzeRepository = async (req, res) => {
 
@@ -9,12 +8,17 @@ const analyzeRepository = async (req, res) => {
         const { repoUrl } = req.body;
 
         const repositoryData = await fetchRepository(repoUrl);
+        const aiAnalysis = await analyzeWithAI(repositoryData);
 
         res.json({
 
             success: true,
 
-            data: repositoryData
+            data: {
+                ...repositoryData,
+                
+                aiAnalysis
+            }
 
         });
 
