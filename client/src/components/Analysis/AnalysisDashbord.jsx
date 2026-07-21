@@ -45,7 +45,7 @@ function AnalysisDashboard({ report }) {
 
     return (
         <section className="py-20">
-            <AIScoreCard />
+            <AIScoreCard report={report}/>
 
             <h2 className="text-4xl font-bold text-center mb-10">
                 🤖 AI Analysis Report

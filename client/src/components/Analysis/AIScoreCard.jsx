@@ -1,4 +1,35 @@
-function AIScoreCard() {
+function AIScoreCard({report}) {
+
+    let score= 50;
+
+    //Stars
+    score += Math.min(report.stars/1000, 20);
+
+    //Forks
+    score += Math.min(report.forks/500, 20);
+
+    //open issue
+    score -= Math.min(report.openIssues/100, 20);
+
+    //score should be between 0 to 100
+    score= Math.max(0, Math.min(100, Math.round(score)));
+
+    let rating = "";
+    let stars = "";
+    
+    if (score >= 90) {
+        rating = "Excellent Repository";
+        stars = "⭐⭐⭐⭐⭐";
+    } else if (score >= 70) {
+        rating = "Good Repository";
+        stars = "⭐⭐⭐⭐☆";
+    } else if (score >= 50) {
+        rating = "Average Repository";
+        stars = "⭐⭐⭐☆☆";
+    } else {
+        rating = "Needs Improvement";
+        stars = "⭐⭐☆☆☆";
+    }
 
     return (
 
@@ -17,7 +48,7 @@ function AIScoreCard() {
                 <div>
 
                     <h1 className="text-6xl font-bold">
-                        92
+                        {score}
                     </h1>
 
                     <p className="text-xl">
@@ -29,11 +60,11 @@ function AIScoreCard() {
                 <div className="text-right">
 
                     <p className="text-2xl">
-                        ⭐⭐⭐⭐☆
+                        {stars}
                     </p>
 
                     <p className="mt-2">
-                        Excellent Repository
+                        {rating}
                     </p>
 
                 </div>
