@@ -1,4 +1,5 @@
 import AnalysisCard from "./AnalysisCard";
+import AIScoreCard from "./AIScoreCard";
 
 function AnalysisDashboard({ report }) {
 
@@ -44,6 +45,7 @@ function AnalysisDashboard({ report }) {
 
     return (
         <section className="py-20">
+            <AIScoreCard />
 
             <h2 className="text-4xl font-bold text-center mb-10">
                 🤖 AI Analysis Report
