@@ -1,5 +1,6 @@
 import AnalysisCard from "./AnalysisCard";
 import AIScoreCard from "./AIScoreCard";
+import RepositoryStats from "./RepositoryStats";
 
 function AnalysisDashboard({ report }) {
 
@@ -17,12 +18,12 @@ function AnalysisDashboard({ report }) {
         {
             icon: "⭐",
             title: "Stars",
-            value: report.stars
+            value: report.stars.toLocaleString()
         },
         {
             icon: "🍴",
             title: "Forks",
-            value: report.forks
+            value: report.forks.toLocaleString()
         },
         {
             icon: "🐞",
@@ -39,9 +40,7 @@ function AnalysisDashboard({ report }) {
     const languages = report.languages || {};
 
     const totalBytes = Object.values(languages).reduce(
-        (sum, value) => sum + value,
-        0
-    );
+        (sum, value) => sum + value, 0);
 
     return (
         <section className="py-20">
@@ -71,17 +70,17 @@ function AnalysisDashboard({ report }) {
                 </h3>
 
                 {
-                    Object.entries(languages).map(([name, bytes]) => {
-
-                        const percentage = ((bytes / totalBytes) * 100).toFixed(1);
-
-                        return (
-
-                            <div
+                Object.entries(languages).map(([name, bytes]) => {
+                    const percentage =
+                         totalBytes > 0
+                         ? ((bytes / totalBytes) * 100).toFixed(1)
+                         : 0;
+                    return (
+                             <div
                                 key={name}
                                 className="mb-6">
                                     
-                                    {/* Top Row */}
+                                {/* Top Row */}
                                     <div className="flex justify-between mb-2">
                                         <span className="font-semibold text-slate-700">
                                             {name}
@@ -91,14 +90,14 @@ function AnalysisDashboard({ report }) {
                                         </span>
                                     </div>
                                     
-                                    {/* Progress Bar Background */}
+                                {/* Progress Bar Background */}
                                     <div className="w-full bg-gray-200 rounded-full h-3">
                                         {/* Filled Progress */}
-                                        <div className="bg-blue-600 h-3 rounded-full transition-all duration-700"
+                                        <div className="bg-blue-600 h-3 rounded-full transition-all  duration-700"
                                         style={{width: `${percentage}%`}}>
 
+                                        </div>
                                     </div>
-                                </div>
                             </div>
 
                         );
@@ -107,6 +106,7 @@ function AnalysisDashboard({ report }) {
                 }
 
             </div>
+            <RepositoryStats report={report} />
 
         </section>
     );
