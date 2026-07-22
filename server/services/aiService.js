@@ -42,6 +42,8 @@ const callGeminiWithRetry = async (prompt, modelIndex = 0) => {
 const analyzeWithAI = async (repositoryData) => {
 
     const prompt = `
+You are a Senior Software Engineer.
+
 Analyze this GitHub repository.
 
 Repository: ${repositoryData.repository}
@@ -54,6 +56,8 @@ Forks: ${repositoryData.forks}
 
 Open Issues: ${repositoryData.openIssues}
 
+Return ONLY valid JSON in exactly this format:
+
 {
   "summary": "",
   "codeQuality": "",
@@ -64,21 +68,36 @@ Open Issues: ${repositoryData.openIssues}
   ]
 }
 
-Do not write markdown.
-Do not use \`\`\`json.
-Return only JSON.
+Rules:
+- No markdown
+- No explanation
+- No code block
+- Only valid JSON
 `;
 
     try {
         const result = await callGeminiWithRetry(prompt);
-        const response = result.response.text();
-        const aiData = JSON.parse(response);
+        
+        const response = result.response.text().trim();
+        try {
+            const aiData = JSON.parse(response);
+            return {
+                summary: aiData.summary,
+                quality: aiData.codeQuality,
+                suggestions: aiData.suggestions || []
+            };
+        } catch (error) {
+            console.error("Invalid AI JSON:", response);
+            return {
+                summary: response,
+                quality: "Unknown",
+                suggestions: []
+            };
+        }
 
-        return {
-            summary: aiData.summary,
-            quality: aiData.codeQuality,
-            suggestions: aiData.suggestions
-        };
+
+
+
     } catch (error) {
         console.error("All Gemini attempts failed:", error.message);
         throw new Error("AI analysis is temporarily unavailable. Please try again shortly.");
