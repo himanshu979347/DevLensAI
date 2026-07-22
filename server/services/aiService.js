@@ -7,7 +7,7 @@ if (!geminiApiKey) {
 
 const genAI = new GoogleGenerativeAI(geminiApiKey);
 
-const MODELS = ["gemini-2.5-flash"]; // primary, then fallback
+const MODELS = ["gemini-3.5-flash", "gemini-2.0-flash"]; // primary, then fallback
 const MAX_RETRIES = 3;
 
 const callGeminiWithRetry = async (prompt, modelIndex = 0) => {
