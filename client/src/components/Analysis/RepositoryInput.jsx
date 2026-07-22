@@ -23,48 +23,35 @@ function RepositoryInput() {
         setLoadingMessage("🔗 Connecting to Backend...");
         setResult("");
 
-        try {
+        setTimeout(() => {
+        setLoadingMessage("📦 Fetching Repository...");
+        }, 1000);
 
-    const response = await fetch("http://localhost:5000/analyze",{
+        setTimeout(() => {
+        setLoadingMessage("🤖 AI is analyzing your repository...");
+        }, 2500);
 
-        method:"POST",
+    try {
+        const response = await fetch("http://localhost:5000/analyze",{
+            method:"POST",
+            headers:{"Content-Type":"application/json"},
+            body:JSON.stringify({repoUrl})
+        });
+        const data = await response.json();
+        setLoading(false);
 
-        headers:{
-
-            "Content-Type":"application/json"
-
-        },
-
-        body:JSON.stringify({
-
-            repoUrl
-
-        })
-
-    });
-
-    const data = await response.json();
-
-setLoading(false);
-
-if(data.success){
-    setResult(data.data);
-}else{
-    alert(data.message);
-}
-
-}catch(error){
-
-console.error("Backend Error :", error);
-
-setLoading(false);
-
-setResult("");
-
-alert("Backend Connection Failed");
-
-}
-
+        if(data.success){
+            setResult(data.data);
+        }else{
+            alert(data.message);
+        }
+    }catch(error){
+        console.error("Backend Error :", error);
+        setLoading(false);
+        setLoadingMessage("");
+        setResult("");
+        alert("Backend Connection Failed");
+        }
     };
 
     return (

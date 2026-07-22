@@ -39,13 +39,17 @@ function AnalysisDashboard({ report }) {
     ];
 
     const languages = report.languages || {};
+    const aiAnalysis = report.aiAnalysis || {
+    summary: "",
+    quality: "",
+    suggestions: []
+    };
 
     const totalBytes = Object.values(languages).reduce(
         (sum, value) => sum + value, 0);
 
     return (
         <section className="py-20">
-            <AIScoreCard report={report}/>
 
             <h2 className="text-4xl font-bold text-center mb-10">
                 🤖 AI Analysis Report
@@ -108,7 +112,7 @@ function AnalysisDashboard({ report }) {
 
             </div>
             <RepositoryStats report={report} />
-            <AISummary aiAnalysis={report.aiAnalysis} />
+            <AISummary aiAnalysis={aiAnalysis} />
 
         </section>
     );

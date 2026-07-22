@@ -42,7 +42,7 @@ function AISummary({ aiAnalysis }) {
 
                     <ul className="list-disc ml-6 mt-2">
 
-                        {aiAnalysis.suggestions.map((item, index) => (
+                        {(aiAnalysis.suggestions || []).map((item,index)=>(
 
                             <li key={index}>
                                 {item}
