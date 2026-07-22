@@ -2,6 +2,8 @@ const axios = require("axios");
 
 const fetchRepository = async (repoUrl) => {
 
+    let githubApi;
+
     try {
 
         const parts = repoUrl.replace("https://github.com/", "").split("/");
@@ -9,7 +11,7 @@ const fetchRepository = async (repoUrl) => {
         const owner = parts[0];
         const repo = parts[1];
 
-        const githubApi = `https://api.github.com/repos/${owner}/${repo}`;
+        githubApi = `https://api.github.com/repos/${owner}/${repo}`;
         console.log("Owner:", owner);
 console.log("Repo:", repo);
 console.log("GitHub API:", githubApi);
