@@ -49,8 +49,8 @@ function RepositoryInput() {
         console.error("Backend Error :", error);
         setLoading(false);
         setLoadingMessage("");
-        setResult("");
-        alert("Backend Connection Failed");
+        setResult(null);
+        alert("Unable to analyze repository. Please try again.");
         }
     };
 
@@ -78,6 +78,7 @@ function RepositoryInput() {
                 <Button
                      text={ loading ? "Analyzing..." : "Analyze"}
                      onClick={handleAnalyze}
+                     disabled={loading}
                 />
             </div>
 
