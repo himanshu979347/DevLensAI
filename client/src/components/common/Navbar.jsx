@@ -1,13 +1,14 @@
 import { useState } from "react";
 import Button from "../common/Button";
+import logo from "../../assets/DevLensAILogo.png";
 
 function Navbar(props){
     const[isMenuOpen, setIsMenuOpen]= useState(false);
     return(
-        <nav className="flex items-center justify-between px-10 py-5 bg-white shadow-md">
-            <h1 className="text-2xl font-bold text-blue-600">
-                 DevLensAI
-            </h1>
+        <nav className="flex items-center justify-between px-4 py-2 bg-white shadow-md">
+            <div className="flex items-center gap-2 cursor-pointer">
+                <img src={logo} alt="DevLensAI" className="h-22 w-auto"/>
+            </div>
 
             <ul className="hidden md:flex gap-8 text-gray-7000 font-medium">
                 <li className="cursor-pointer hover:text-blue-600 transition">Features</li>
