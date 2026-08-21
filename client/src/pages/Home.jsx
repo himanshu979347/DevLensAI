@@ -9,6 +9,7 @@ function Home(){
         <RepositoryInput/>
         <Features/>
         <WhyChoose/>
+        <footer/>
         </>
     );
 }

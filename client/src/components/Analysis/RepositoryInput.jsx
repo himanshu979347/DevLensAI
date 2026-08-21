@@ -1,6 +1,7 @@
 import Button from "../common/Button";
 import { useState } from "react";
 import AnalysisDashboard from "./AnalysisDashbord";
+import heroBg from "../../assets/pages2_bg.jpeg";
 
 function RepositoryInput() {
     const[repoUrl, setRepoUrl]=useState("");
@@ -55,13 +56,20 @@ function RepositoryInput() {
     };
 
     return (
-        <section className="py-20 bg-white">
+        <section className="py-20 bg-center bg-no-repeat"
+        style={{
+            backgroundImage: `linear-gradient(
+                rgba(255, 255, 255, 0.59),
+                rgba(255, 255, 255, 0.59)
+            ), url(${heroBg})`
+        }}
+    >
 
             <h2 className="text-4xl font-bold text-center">
                 Analyze Your GitHub Repository
             </h2>
 
-            <p className="text-center text-gray-600 mt-4">
+            <p className="text-center text-gray-700 mt-4">
                 Paste your GitHub repository URL and let DevLensAI explain your project.
             </p>
 
@@ -72,7 +80,7 @@ function RepositoryInput() {
                     placeholder="https://github.com/username/repository"
                     value={repoUrl}
                     onChange={(e) => setRepoUrl(e.target.value)}
-                    className="flex-1 border border-gray-300 rounded-lg px-4 py-3 outline-none focus:ring-2 focus:ring-blue-500"
+                    className="flex-1 border border-black rounded-lg px-4 py-3 outline-none focus:ring-2 focus:ring-blue-500"
                 />
 
                 <Button
