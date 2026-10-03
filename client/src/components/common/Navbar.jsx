@@ -1,8 +1,10 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Button from "../common/Button";
 import logo from "../../assets/DevLensAILogo-removebg-preview.png";
 
-function Navbar(props){
+function Navbar(){
+    const navigate = useNavigate();
     const[isMenuOpen, setIsMenuOpen]= useState(false);
     return(
         <nav className="flex items-center justify-between px-2 py-1 bg-slate-200 shadow-md">
@@ -20,7 +22,12 @@ function Navbar(props){
             <div className="hidden md:flex gap-4">
                 <Button
                 text="Login"
-                variant="secondary"/>
+                variant="secondary"
+                onClick={() => {
+                navigate("/signin");
+                setIsMenuOpen(false);
+                }}
+                />
                 <Button text="Get Started"/>
             </div>
 
@@ -49,10 +56,10 @@ function Navbar(props){
             <div className="flex flex-col gap-3 mt-5">
 
                 <Button
-                    text="Login"
-                    variant="secondary"
+                text="Login"
+                variant="secondary"
+                onClick={() => navigate("/signin")}
                 />
-
                 <Button
                     text="Get Started"
                 />
