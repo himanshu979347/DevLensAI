@@ -107,9 +107,13 @@ function SignIn() {
 
                 <p className="text-center text-gray-400 mt-6">
                     Don't have an account?{" "}
-                    <a href="#" className="text-blue-400">
+                    <button
+                        type="button"
+                        onClick={() => navigate("/signup")}
+                        className="text-blue-400 hover:text-blue-300"
+                    >
                         Sign Up
-                    </a>
+                    </button>
                 </p>
 
             </div>
