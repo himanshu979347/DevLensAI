@@ -12,7 +12,7 @@ function SignUp() {
     const [showconfirmPassword, setShowconfirmPassword] = useState(false);
     const [error, setError] = useState("");
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!name || !email || !password || !confirmPassword) {
@@ -42,12 +42,37 @@ function SignUp() {
         return;
     }
 
+    try {
+    const response = await fetch("http://localhost:5000/api/auth/register", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            name,
+            email,
+            password
+        })
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+        setError(data.message || "Registration failed");
+        return;
+    }
+
     setError("");
 
-    console.log("Name:", name);
-    console.log("Email:", email);
-    console.log("Account creation ready");
-};
+    alert("Account created successfully!");
+
+    navigate("/signin");
+
+    } catch (error) {
+        console.error(error);
+        setError("Unable to connect to server.");
+    }
+    };
 
     return (
         <div className="min-h-screen bg-slate-950 flex items-center justify-center px-4">

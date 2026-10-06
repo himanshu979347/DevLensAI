@@ -9,7 +9,7 @@ function SignIn() {
     const [showPassword, setShowPassword] = useState(false);
     const [error, setError] = useState("");
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!email || !password) {
@@ -17,16 +17,37 @@ function SignIn() {
         return;
     }
 
-    if (password.length < 6) {
-        setError("Password must be at least 6 characters.");
-        return;
-    }
+    try {
+        const response = await fetch("http://localhost:5000/api/auth/login", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                email,
+                password
+            })
+        });
 
-    setError("");
+        const data = await response.json();
 
-    console.log("Email:", email);
-    console.log("Password:", password);
-};
+        if (!response.ok) {
+            setError(data.message || "Login failed");
+            return;
+        }
+
+        setError("");
+
+        localStorage.setItem("token", data.token);
+        localStorage.setItem("user", JSON.stringify(data.user));
+
+        navigate("/");
+
+        } catch (error) {
+            console.error(error);
+            setError("Unable to connect to server.");
+        }
+    };
 
     return (
         <div className="min-h-screen bg-slate-950 flex items-center justify-center px-4">
